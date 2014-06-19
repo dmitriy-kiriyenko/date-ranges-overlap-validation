@@ -24,3 +24,6 @@ A query that will return all dates overlapping given interval:
 ```sql
 SELECT * FROM intervals WHERE TIME_DIFF(intervals.start_date, given_start_date) * TIME_DIFF(given_end_date, intervals.end_date) >= 0
 ```
+
+You may want to use `DATE_DIFF` instead of `TIME_DIFF` if you are
+comparing just dates.
