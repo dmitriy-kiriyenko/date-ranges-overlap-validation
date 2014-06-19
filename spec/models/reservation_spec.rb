@@ -46,10 +46,15 @@ RSpec.describe Reservation, :type => :model do
         expect(reserve_at(19..22)).to_not be_valid
       end
 
-      #it 'allows serial from backward' do
-        #reserve_at(19..20).save!
-        #expect(reserve_at(20..21)).to be_valid
-      #end
+      it 'allows serial from backward' do
+        reserve_at(19..20).save!
+        expect(reserve_at(20..21)).to be_valid
+      end
+
+      it 'allows serial from forward' do
+        reserve_at(19..20).save!
+        expect(reserve_at(20..21)).to be_valid
+      end
     end
   end
 end

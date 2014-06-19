@@ -6,7 +6,7 @@ class Reservation < ActiveRecord::Base
 
   scope :overlaps, ->(interval) {
     where.not(id: interval.id)
-      .where("date_part('epoch', (start_time - ?)) * date_part('epoch', (? - end_time)) >= 0",
+      .where("date_part('epoch', (start_time - ?)) * date_part('epoch', (? - end_time)) > 0",
              interval.end_time, interval.start_time)
   }
 
