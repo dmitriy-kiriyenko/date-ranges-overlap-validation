@@ -27,3 +27,9 @@ SELECT * FROM intervals WHERE TIME_DIFF(intervals.start_date, given_start_date) 
 
 You may want to use `DATE_DIFF` instead of `TIME_DIFF` if you are
 comparing just dates.
+
+In postgresql everything is different. You do:
+
+```sql
+SELECT * FROM intervals WHERE date_part('epoch', (intervals.start_date - given_start_date)) * date_part('epoch', (given_end_date - intervals.end_date))
+```
