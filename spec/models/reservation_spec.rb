@@ -16,15 +16,40 @@ RSpec.describe Reservation, :type => :model do
                                end_time: time_at(range.last))
       end
 
-      it 'allows two reservations to co-exist' do
+      it 'allows to book forward' do
         reserve_at(19..20).save!
         expect(reserve_at(21..22)).to be_valid
       end
 
-      it 'checks overlap' do
+      it 'allows to book backward' do
+        reserve_at(21..22).save!
+        expect(reserve_at(19..20)).to be_valid
+      end
+
+      it 'checks overlap from behind' do
         reserve_at(19..21).save!
         expect(reserve_at(20..22)).to_not be_valid
       end
+
+      it 'checks overlap from forward' do
+        reserve_at(20..22).save!
+        expect(reserve_at(19..21)).to_not be_valid
+      end
+
+      it 'checks interrior surround' do
+        reserve_at(19..22).save!
+        expect(reserve_at(20..21)).to_not be_valid
+      end
+
+      it 'checks exterrior surround' do
+        reserve_at(20..21).save!
+        expect(reserve_at(19..22)).to_not be_valid
+      end
+
+      #it 'allows serial from backward' do
+        #reserve_at(19..20).save!
+        #expect(reserve_at(20..21)).to be_valid
+      #end
     end
   end
 end
