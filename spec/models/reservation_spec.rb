@@ -55,6 +55,12 @@ RSpec.describe Reservation, :type => :model do
         reserve_at(19..20).save!
         expect(reserve_at(20..21)).to be_valid
       end
+
+      it 'ignores other tables' do
+        reserve_at(19..21, second_table).save!
+        expect(reserve_at(20..22)).to be_valid
+      end
+
     end
   end
 end
